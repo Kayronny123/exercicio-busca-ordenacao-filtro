@@ -45,7 +45,7 @@ function App(props) {
               .includes(pesquisa.toLowerCase());
           })
           .filter((pokemon) => {
-            return pokemon.type;
+            return pokemon.type[0] === type;
           })
           .map((pokemon) => {
             return (

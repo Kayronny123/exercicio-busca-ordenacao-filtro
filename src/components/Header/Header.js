@@ -30,7 +30,7 @@ const Header = (props) => {
   const handleIdSearch = (e) => {
     props.setIdFilter(e.target.value);
   };
-  const handleTipoSearch = (e) => {
+  const handleTypeSearch = (e) => {
     props.setType(e.target.value);
   };
 
@@ -56,8 +56,8 @@ const Header = (props) => {
       <select
         name="tipo"
         id="tipo"
-        value={props.tipo}
-        onChange={handleTipoSearch}
+        value={props.type}
+        onChange={handleTypeSearch}
       >
         <option>Selecione um tipo</option>
         {pokemontypesArray.map((type) => {
