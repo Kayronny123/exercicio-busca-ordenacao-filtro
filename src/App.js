@@ -18,10 +18,11 @@ const CardsContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
   justify-items: center;
 `;
-function App(props) {
+function App() {
   const [pesquisa, setPesquisa] = useState("");
   const [idFilter, setIdFilter] = useState("");
-  const [type, setType] = useState([]);
+  const [type, setType] = useState("");
+  const [ordenar, setOrdenar] = useState("");
 
   return (
     <>
@@ -33,6 +34,8 @@ function App(props) {
         setPesquisa={setPesquisa}
         type={type}
         setType={setType}
+        ordenar={ordenar}
+        setOrdenar={setOrdenar}
       />
       <CardsContainer>
         {pokemons
@@ -45,8 +48,22 @@ function App(props) {
               .includes(pesquisa.toLowerCase());
           })
           .filter((pokemon) => {
-            return pokemon.type[0] === type;
+            return type === "" ? pokemon : pokemon.type.includes(type);
           })
+          .sort((pokemon1, pokemon2) => {
+            if (ordenar === "crescente") {
+              return pokemon1.name.english > pokemon2.name.english ? 1 : -1;
+            } else if (ordenar === "decrescente") {
+              return pokemon2.name.english > pokemon1.name.english ? 1 : -1;
+            }
+          })
+          // return pokemon.type[0] === type;
+          //   if (type === pokemon)  {
+          //      return pokemon
+          //   } else {
+          //     return pokemon.type.includes(type);
+          //   }
+          // })
           .map((pokemon) => {
             return (
               <PokemonCard
